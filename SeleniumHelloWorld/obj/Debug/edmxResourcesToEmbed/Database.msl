@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestBD1ModelStoreContainer" CdmEntityContainer="TestBD1Entities">
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="TestBD1Model.Person">
+        <MappingFragment StoreEntitySet="People">
+          <ScalarProperty Name="PeopleId" ColumnName="PeopleId" />
+          <ScalarProperty Name="FacebookId" ColumnName="FacebookId" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="FacebookLink" ColumnName="FacebookLink" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="InterestedIn" ColumnName="InterestedIn" />
+          <ScalarProperty Name="languages" ColumnName="languages" />
+          <ScalarProperty Name="ReligousViews" ColumnName="ReligousViews" />
+          <ScalarProperty Name="NickName" ColumnName="NickName" />
+          <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+          <ScalarProperty Name="FavoriteQoutes" ColumnName="FavoriteQoutes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="TestBD1Model.Comment">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="PostLink" ColumnName="PostLink" />
+          <ScalarProperty Name="CommentShareCount" ColumnName="CommentShareCount" />
+          <ScalarProperty Name="CommentLikesCount" ColumnName="CommentLikesCount" />
+          <ScalarProperty Name="CommentDateTime" ColumnName="CommentDateTime" />
+          <ScalarProperty Name="CommentContent" ColumnName="CommentContent" />
+          <ScalarProperty Name="CommentOwner" ColumnName="CommentOwner" />
+          <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Posts">
+      <EntityTypeMapping TypeName="TestBD1Model.Post">
+        <MappingFragment StoreEntitySet="Post">
+          <ScalarProperty Name="PostContent" ColumnName="PostContent" />
+          <ScalarProperty Name="PostDateTime" ColumnName="PostDateTime" />
+          <ScalarProperty Name="PostLink" ColumnName="PostLink" />
+          <ScalarProperty Name="PostOwner" ColumnName="PostOwner" />
+          <ScalarProperty Name="PostId" ColumnName="PostId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

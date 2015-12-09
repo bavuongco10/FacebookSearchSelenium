@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestBD1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CommentOwner" Type="text" />
+    <Property Name="CommentContent" Type="nvarchar" MaxLength="4000" />
+    <Property Name="CommentDateTime" Type="text" />
+    <Property Name="CommentLikesCount" Type="nchar" MaxLength="10" />
+    <Property Name="CommentShareCount" Type="nchar" MaxLength="10" />
+    <Property Name="PostLink" Type="nvarchar" MaxLength="400" />
+  </EntityType>
+  <EntityType Name="People">
+    <Key>
+      <PropertyRef Name="PeopleId" />
+    </Key>
+    <Property Name="PeopleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FacebookId" Type="nvarchar" MaxLength="20" />
+    <Property Name="Phone" Type="text" />
+    <Property Name="Address" Type="text" />
+    <Property Name="FacebookLink" Type="nvarchar" MaxLength="200" />
+    <Property Name="Birthday" Type="nvarchar" MaxLength="50" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="6" />
+    <Property Name="InterestedIn" Type="nvarchar" MaxLength="15" />
+    <Property Name="languages" Type="nvarchar" MaxLength="100" />
+    <Property Name="ReligousViews" Type="nvarchar" MaxLength="50" />
+    <Property Name="NickName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Relationship" Type="nvarchar" MaxLength="50" />
+    <Property Name="FavoriteQoutes" Type="text" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="PostId" />
+    </Key>
+    <Property Name="PostId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PostOwner" Type="text" />
+    <Property Name="PostLink" Type="nvarchar" MaxLength="400" />
+    <Property Name="PostDateTime" Type="text" />
+    <Property Name="PostContent" Type="nvarchar" MaxLength="4000" />
+  </EntityType>
+  <EntityContainer Name="TestBD1ModelStoreContainer">
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
