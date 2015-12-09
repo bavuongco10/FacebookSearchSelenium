@@ -36,6 +36,7 @@
     <EntitySetMapping Name="Posts">
       <EntityTypeMapping TypeName="TestBD1Model.Post">
         <MappingFragment StoreEntitySet="Post">
+          <ScalarProperty Name="SearchString" ColumnName="SearchString" />
           <ScalarProperty Name="PostContent" ColumnName="PostContent" />
           <ScalarProperty Name="PostDateTime" ColumnName="PostDateTime" />
           <ScalarProperty Name="PostLink" ColumnName="PostLink" />

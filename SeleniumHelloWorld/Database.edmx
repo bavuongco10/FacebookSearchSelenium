@@ -44,6 +44,7 @@
           <Property Name="PostLink" Type="nvarchar" MaxLength="400" />
           <Property Name="PostDateTime" Type="text" />
           <Property Name="PostContent" Type="nvarchar" MaxLength="4000" />
+          <Property Name="SearchString" Type="text" />
         </EntityType>
         <EntityContainer Name="TestBD1ModelStoreContainer">
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
@@ -98,6 +99,7 @@
           <Property Name="PostLink" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
           <Property Name="PostDateTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="PostContent" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="SearchString" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -140,6 +142,7 @@
           <EntitySetMapping Name="Posts">
             <EntityTypeMapping TypeName="TestBD1Model.Post">
               <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="SearchString" ColumnName="SearchString" />
                 <ScalarProperty Name="PostContent" ColumnName="PostContent" />
                 <ScalarProperty Name="PostDateTime" ColumnName="PostDateTime" />
                 <ScalarProperty Name="PostLink" ColumnName="PostLink" />

@@ -39,6 +39,7 @@
     <Property Name="PostLink" Type="nvarchar" MaxLength="400" />
     <Property Name="PostDateTime" Type="text" />
     <Property Name="PostContent" Type="nvarchar" MaxLength="4000" />
+    <Property Name="SearchString" Type="text" />
   </EntityType>
   <EntityContainer Name="TestBD1ModelStoreContainer">
     <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />

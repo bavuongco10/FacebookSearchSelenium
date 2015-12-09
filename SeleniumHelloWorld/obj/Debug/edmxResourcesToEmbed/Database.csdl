@@ -44,5 +44,6 @@
     <Property Name="PostLink" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
     <Property Name="PostDateTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="PostContent" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="SearchString" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

@@ -13,6 +13,9 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using System.Web;
 
+// Get shares
+//https://touch.facebook.com/browse/shares/?id=10152751123721371
+
 namespace SeleniumHelloWorld
 {
     internal class Crawl
@@ -23,6 +26,14 @@ namespace SeleniumHelloWorld
         public IWebDriver DriverPost;
         public IWebDriver DriverReply;
 
+        private string SearchString
+        {
+            get
+            {
+                return EncodeSearchString("halong bay");
+                
+            }
+        }
         public List<string> listUrl = new List<string>();  
 
         public void Main()
@@ -79,6 +90,7 @@ namespace SeleniumHelloWorld
                         postModel.PostDateTime = dateTime;
                         postModel.PostContent = postContent;
                         postModel.PostLink = postUrl;
+                        postModel.SearchString= SearchString;
                         db.Posts.Add(postModel);
                         db.SaveChanges();
 
@@ -101,7 +113,7 @@ namespace SeleniumHelloWorld
             switch (driverType)
             {
                 case DriverType.Search:
-                    driver.Navigate().GoToUrl("https://www.facebook.com/search/top/?q=" + EncodeSearchString("halong bay"));
+                    driver.Navigate().GoToUrl("https://www.facebook.com/search/top/?q=" + SearchString);
                     break;
                 case DriverType.Post:
                     driver.Navigate().GoToUrl(url);

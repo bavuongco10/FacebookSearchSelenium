@@ -19,5 +19,6 @@ namespace SeleniumHelloWorld
         public string PostLink { get; set; }
         public string PostDateTime { get; set; }
         public string PostContent { get; set; }
+        public string SearchString { get; set; }
     }
 }
