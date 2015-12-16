@@ -99,4 +99,3 @@ C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\S
 C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\bin\Debug\EntityFramework.xml
 C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\obj\Debug\SeleniumHelloWorld.csprojResolveAssemblyReference.cache

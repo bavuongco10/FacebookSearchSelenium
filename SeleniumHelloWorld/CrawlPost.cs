@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.SQLite;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -18,62 +19,58 @@ using System.Web;
 
 namespace SeleniumHelloWorld
 {
-    internal class Crawl
+    internal class CrawlPost
     {
+        private DriverFunction driverFunction = new DriverFunction();
+        private string cookiesFilePath = "d:\\cookies.txt";
         public TestBD1Entities db = new TestBD1Entities();
         public Resources Resources = new Resources();
         public IWebDriver DriverSearch;
         public IWebDriver DriverPost;
         public IWebDriver DriverReply;
 
+        public CrawlPost()
+        {
+            Init();
+        }
         private string SearchString
         {
             get
             {
-                return EncodeSearchString("halong bay");
+                return EncodeSearchString("vietnamese food");
                 
             }
         }
         public List<string> listUrl = new List<string>();  
 
-        public void Main()
+        public void Init()
         {
-            InitDriver();
-
+            InitDrivers();
             Navigate(DriverSearch, DriverType.Search);
             CrawlPostsFromSrearch(DriverSearch);
         }
 
-        private void InitDriver()
+        private void InitDrivers()
         {
-            // Driver for search page
-            DriverSearch = new ChromeDriver(DriverService(), ChromeOptions());
-            Login(DriverSearch);
+            driverFunction.InitDriver(DriverSearch);
+            
+            driverFunction.InitDriver(DriverPost);
 
-            // Driver for post page
-            DriverPost = new ChromeDriver(DriverService(), ChromeOptions());
-            Login(DriverPost);
-
-            //Driver for reply
-            DriverReply = new ChromeDriver(DriverService(),ChromeOptions());
-            Login(DriverReply);
+            driverFunction.InitDriver(DriverReply);
         }
 
+        
         private void CrawlPostsFromSrearch(IWebDriver driver)
         {
-            
-
             int pastPostsLength = 0;
             while (true)
             {
-                var postsWebdriver = driver.FindElements(By.ClassName("userContentWrapper"));
-                //var postUrls = driver.FindElements(By.XPath("//*[@data-comment-prelude-ref='action_link_bling']"));
-                for (int i = pastPostsLength; i < postsWebdriver.Count; i++)
+                try
                 {
-                    try
+                    var postsWebdriver = driver.FindElements(By.ClassName("userContentWrapper"));
+                    //var postUrls = driver.FindElements(By.XPath("//*[@data-comment-prelude-ref='action_link_bling']"));
+                    for (int i = pastPostsLength; i < postsWebdriver.Count; i++)
                     {
-
-
                         Post postModel = new Post();
                         var post = postsWebdriver[i];
                         string postUrl;
@@ -90,22 +87,24 @@ namespace SeleniumHelloWorld
                         postModel.PostDateTime = dateTime;
                         postModel.PostContent = postContent;
                         postModel.PostLink = postUrl;
-                        postModel.SearchString= SearchString;
+                        postModel.SearchString = SearchString;
                         db.Posts.Add(postModel);
                         db.SaveChanges();
 
                         CrawlCommentFromPost(DriverPost, postUrl);
-
                     }
-                    catch (Exception)
-                    {
-                        
-                    }
+                    pastPostsLength = postsWebdriver.Count;
+                    driverFunction.JavaScriptController(driver, JavaScriptType.ScrollBy);
                 }
-                pastPostsLength = postsWebdriver.Count;
-                JavaScriptController(driver, JavaScriptType.ScrollBy);
+                catch (Exception)
+                {
+                    // ignored
+                }
+
+                
             }
         }
+
 
 
         private void Navigate(IWebDriver driver,DriverType driverType,string url=null)
@@ -261,71 +260,6 @@ namespace SeleniumHelloWorld
             //}
         }
 
-        public ChromeDriverService DriverService()
-        {
-            var driverService = ChromeDriverService.CreateDefaultService();
-            driverService.HideCommandPromptWindow = true;
-            return driverService;
-        }
-
-        public ChromeOptions ChromeOptions()
-        {
-            var imageSetting = new Dictionary<string, object>();
-            imageSetting.Add("images", 2);
-            var content = new Dictionary<string, object>();
-            content.Add("profile.default_content_settings", imageSetting);
-
-            var prefs = new Dictionary<string, object>();
-            prefs.Add("prefs", content);
-
-            var options = new ChromeOptions();
-            var field = options.GetType()
-                .GetField("additionalCapabilities", BindingFlags.Instance | BindingFlags.NonPublic);
-            if (field != null)
-            {
-                var dict = field.GetValue(options) as IDictionary<string, object>;
-                if (dict != null)
-                    dict.Add(OpenQA.Selenium.Chrome.ChromeOptions.Capability, prefs);
-            }
-            return options;
-        }
-
-        public void Login(IWebDriver driver)
-        {
-            driver.Navigate().GoToUrl("https://mbasic.facebook.com/");
-            LoginByAccount(driver);
-        }
-
-        public void LoginByAccount(IWebDriver driver)
-        {
-            driver.FindElement(By.Name("email")).Clear();
-            driver.FindElement(By.Name("email")).SendKeys(Resources.userName);
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(Resources.pass);
-            driver.FindElement(By.Name("login")).Click();
-        }
-
-
-        public void LoginByCookies(IWebDriver driver)
-        {
-            
-        }
-
-        public void JavaScriptController(IWebDriver driver, JavaScriptType javaScriptType)
-        {
-            switch (javaScriptType)
-            {
-                    case JavaScriptType.ScrollBy:
-                    ExecuteJavaScript(driver,"window.scrollBy(0,1000)");
-                    break;
-            }
-        }
-
-        public void ExecuteJavaScript(IWebDriver driver,string javaScript)
-        {
-            IJavaScriptExecutor js = driver as IJavaScriptExecutor;
-            string title = (string)js.ExecuteScript(javaScript);
-        }
     }
 }
 

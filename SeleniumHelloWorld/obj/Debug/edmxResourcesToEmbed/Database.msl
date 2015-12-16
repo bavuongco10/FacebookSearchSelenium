@@ -6,7 +6,7 @@
         <MappingFragment StoreEntitySet="People">
           <ScalarProperty Name="PeopleId" ColumnName="PeopleId" />
           <ScalarProperty Name="FacebookId" ColumnName="FacebookId" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="FacebookLink" ColumnName="FacebookLink" />
           <ScalarProperty Name="Birthday" ColumnName="Birthday" />

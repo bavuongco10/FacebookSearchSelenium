@@ -5,7 +5,7 @@
       <PropertyRef Name="CommentId" />
     </Key>
     <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CommentOwner" Type="text" />
+    <Property Name="CommentOwner" Type="nvarchar" MaxLength="200" />
     <Property Name="CommentContent" Type="nvarchar" MaxLength="4000" />
     <Property Name="CommentDateTime" Type="text" />
     <Property Name="CommentLikesCount" Type="nchar" MaxLength="10" />
@@ -18,7 +18,7 @@
     </Key>
     <Property Name="PeopleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FacebookId" Type="nvarchar" MaxLength="20" />
-    <Property Name="Phone" Type="text" />
+    <Property Name="Mobile" Type="text" />
     <Property Name="Address" Type="text" />
     <Property Name="FacebookLink" Type="nvarchar" MaxLength="200" />
     <Property Name="Birthday" Type="nvarchar" MaxLength="50" />

@@ -6,7 +6,7 @@
     </Key>
     <Property Name="PeopleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FacebookId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="FacebookLink" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Birthday" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -28,7 +28,7 @@
       <PropertyRef Name="CommentId" />
     </Key>
     <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CommentOwner" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CommentOwner" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="CommentContent" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
     <Property Name="CommentDateTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="CommentLikesCount" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />

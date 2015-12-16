@@ -24,7 +24,7 @@ namespace SeleniumHelloWorld
             //var resources = new Resources(txtUserName.Text, txtPass.Text, txtLinkToPost.Text);
             ////Resources resources = new Resources();
             //var function = new Function();
-            //function.Main(resources);
+            //function.Init(resources);
             //MessageBox.Show("Start Cralwing");
             //txtLinkToPost.Enabled = false;
             //txtUserName.Enabled = false;

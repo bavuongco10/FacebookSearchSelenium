@@ -98,6 +98,7 @@
     <Compile Include="Comment.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="CrawlInfor.cs" />
     <Compile Include="Database.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -119,6 +120,8 @@
     <Compile Include="input.Designer.cs">
       <DependentUpon>input.cs</DependentUpon>
     </Compile>
+    <Compile Include="DriverFunction.cs" />
+    <Compile Include="OpinionFinder.cs" />
     <Compile Include="Person.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -128,7 +131,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.cs" />
-    <Compile Include="Crawl.cs" />
+    <Compile Include="CrawlPost.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
