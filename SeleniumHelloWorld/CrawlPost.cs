@@ -149,6 +149,15 @@ namespace SeleniumHelloWorld
                             commentObject.FindElement(By.ClassName("_1s79"))
                                 .GetAttribute("href")
                                 .Replace("https://touch.facebook.com/", "");
+                        if (commentOwner.Contains("?fref=nf"))
+                        {
+                            commentOwner = commentOwner.Remove(commentOwner.IndexOf("?fref=nf", StringComparison.Ordinal));
+                        }
+                        else if (commentOwner.Contains("?refid="))
+                        {
+                            commentOwner = commentOwner.Remove(commentOwner.IndexOf("?refid=", StringComparison.Ordinal));
+                        }
+
                         var commentWebDriver = commentObject.FindElements(By.TagName("div"));
                         var commentContent = commentWebDriver[0].Text;
                         var commentDataTime =
@@ -210,6 +219,16 @@ namespace SeleniumHelloWorld
                             commentObject.FindElement(By.ClassName("_1s79"))
                                 .GetAttribute("href")
                                 .Replace("https://touch.facebook.com/", "");
+
+                        if (commentOwner.Contains("?fref=nf"))
+                        {
+                            commentOwner = commentOwner.Remove(commentOwner.IndexOf("?fref=nf", StringComparison.Ordinal));
+                        }
+                        else if (commentOwner.Contains("?refid="))
+                        {
+                            commentOwner = commentOwner.Remove(commentOwner.IndexOf("?refid=", StringComparison.Ordinal));
+                        }
+
                         var commentWebDriver = commentObject.FindElements(By.TagName("div"));
                         var commentContent = commentWebDriver[0].Text;
                         var commentDataTime =

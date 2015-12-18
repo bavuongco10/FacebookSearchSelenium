@@ -25,8 +25,12 @@ namespace SeleniumHelloWorld
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<PeopleWorkEdu> PeopleWorkEdus { get; set; }
+        public virtual DbSet<PeoplePlace> PeoplePlaces { get; set; }
+        public virtual DbSet<FamilyRole> FamilyRoles { get; set; }
     }
 }

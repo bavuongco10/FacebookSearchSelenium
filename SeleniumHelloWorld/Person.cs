@@ -16,16 +16,23 @@ namespace SeleniumHelloWorld
     {
         public int PeopleId { get; set; }
         public string FacebookId { get; set; }
+        public string FacebookName { get; set; }
+        public string Skills { get; set; }
         public string Phone { get; set; }
-        public string Address { get; set; }
-        public string FacebookLink { get; set; }
+        public string AddressName { get; set; }
+        public string AddressMapLink { get; set; }
+        public string Screennames { get; set; }
+        public string Website { get; set; }
+        public string Email { get; set; }
         public string Birthday { get; set; }
         public string Gender { get; set; }
         public string InterestedIn { get; set; }
-        public string languages { get; set; }
+        public string Languages { get; set; }
         public string ReligousViews { get; set; }
-        public string NickName { get; set; }
+        public string ReligousViewsLink { get; set; }
+        public string PoliticalViews { get; set; }
+        public string PoliticalViewsLink { get; set; }
         public string Relationship { get; set; }
-        public string FavoriteQoutes { get; set; }
+        public string CommentOwner { get; set; }
     }
 }

@@ -114,6 +114,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.edmx</DependentUpon>
     </Compile>
+    <Compile Include="FamilyRole.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="input.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +125,12 @@
     </Compile>
     <Compile Include="DriverFunction.cs" />
     <Compile Include="OpinionFinder.cs" />
+    <Compile Include="PeoplePlace.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PeopleWorkEdu.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Person.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -132,6 +141,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.cs" />
     <Compile Include="CrawlPost.cs" />
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -17,23 +17,60 @@
           <Property Name="CommentShareCount" Type="nchar" MaxLength="10" />
           <Property Name="PostLink" Type="nvarchar" MaxLength="400" />
         </EntityType>
+        <EntityType Name="FamilyRole">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FacebookID1" Type="nvarchar" MaxLength="100" />
+          <Property Name="FacebookID2" Type="nvarchar(max)" />
+          <Property Name="Role" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="People">
           <Key>
             <PropertyRef Name="PeopleId" />
           </Key>
           <Property Name="PeopleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FacebookId" Type="nvarchar" MaxLength="20" />
-          <Property Name="Mobile" Type="text" />
-          <Property Name="Address" Type="text" />
-          <Property Name="FacebookLink" Type="nvarchar" MaxLength="200" />
-          <Property Name="Birthday" Type="nvarchar" MaxLength="50" />
-          <Property Name="Gender" Type="nvarchar" MaxLength="6" />
-          <Property Name="InterestedIn" Type="nvarchar" MaxLength="15" />
-          <Property Name="languages" Type="nvarchar" MaxLength="100" />
-          <Property Name="ReligousViews" Type="nvarchar" MaxLength="50" />
-          <Property Name="NickName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Relationship" Type="nvarchar" MaxLength="50" />
-          <Property Name="FavoriteQoutes" Type="text" />
+          <Property Name="FacebookId" Type="nvarchar" MaxLength="100" />
+          <Property Name="FacebookName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Skills" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="100" />
+          <Property Name="AddressName" Type="nvarchar(max)" />
+          <Property Name="AddressMapLink" Type="nvarchar(max)" />
+          <Property Name="Screennames" Type="nvarchar(max)" />
+          <Property Name="Website" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Birthday" Type="nvarchar" MaxLength="100" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="100" />
+          <Property Name="InterestedIn" Type="nvarchar(max)" />
+          <Property Name="Languages" Type="nvarchar(max)" />
+          <Property Name="ReligousViews" Type="nvarchar(max)" />
+          <Property Name="ReligousViewsLink" Type="nvarchar(max)" />
+          <Property Name="PoliticalViews" Type="nvarchar(max)" />
+          <Property Name="PoliticalViewsLink" Type="nvarchar(max)" />
+          <Property Name="Relationship" Type="nvarchar(max)" />
+          <Property Name="CommentOwner" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="PeoplePlace">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Url" Type="nvarchar(max)" />
+          <Property Name="Role" Type="nvarchar(max)" />
+          <Property Name="FacebookID" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PeopleWorkEdu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FacebookID" Type="nvarchar" MaxLength="100" />
+          <Property Name="Link" Type="nvarchar(max)" />
+          <Property Name="Level" Type="nvarchar(max)" />
+          <Property Name="DateTime" Type="nvarchar(max)" />
+          <Property Name="Role" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Post">
           <Key>
@@ -46,37 +83,37 @@
           <Property Name="PostContent" Type="nvarchar" MaxLength="4000" />
           <Property Name="SearchString" Type="text" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityContainer Name="TestBD1ModelStoreContainer">
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FamilyRole" EntityType="Self.FamilyRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PeoplePlace" EntityType="Self.PeoplePlace" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PeopleWorkEdu" EntityType="Self.PeopleWorkEdu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TestBD1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Person">
-          <Key>
-            <PropertyRef Name="PeopleId" />
-          </Key>
-          <Property Name="PeopleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FacebookId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="FacebookLink" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Birthday" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Gender" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
-          <Property Name="InterestedIn" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="languages" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ReligousViews" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Relationship" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FavoriteQoutes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityContainer Name="TestBD1Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="People" EntityType="Self.Person" />
           <EntitySet Name="Comments" EntityType="TestBD1Model.Comment" />
           <EntitySet Name="Posts" EntityType="TestBD1Model.Post" />
+          <EntitySet Name="sysdiagrams" EntityType="TestBD1Model.sysdiagram" />
+          <EntitySet Name="People" EntityType="TestBD1Model.Person" />
+          <EntitySet Name="PeopleWorkEdus" EntityType="TestBD1Model.PeopleWorkEdu" />
+          <EntitySet Name="PeoplePlaces" EntityType="TestBD1Model.PeoplePlace" />
+          <EntitySet Name="FamilyRoles" EntityType="TestBD1Model.FamilyRole" />
         </EntityContainer>
         <EntityType Name="Comment">
           <Key>
@@ -101,31 +138,77 @@
           <Property Name="PostContent" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="SearchString" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PeopleId" />
+          </Key>
+          <Property Name="PeopleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FacebookId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Skills" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AddressName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddressMapLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Screennames" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InterestedIn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Languages" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReligousViews" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReligousViewsLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PoliticalViews" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PoliticalViewsLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Relationship" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CommentOwner" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PeopleWorkEdu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FacebookID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Level" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PeoplePlace">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FamilyRole">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FacebookID1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookID2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TestBD1ModelStoreContainer" CdmEntityContainer="TestBD1Entities">
-          <EntitySetMapping Name="People">
-            <EntityTypeMapping TypeName="TestBD1Model.Person">
-              <MappingFragment StoreEntitySet="People">
-                <ScalarProperty Name="PeopleId" ColumnName="PeopleId" />
-                <ScalarProperty Name="FacebookId" ColumnName="FacebookId" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="FacebookLink" ColumnName="FacebookLink" />
-                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="InterestedIn" ColumnName="InterestedIn" />
-                <ScalarProperty Name="languages" ColumnName="languages" />
-                <ScalarProperty Name="ReligousViews" ColumnName="ReligousViews" />
-                <ScalarProperty Name="NickName" ColumnName="NickName" />
-                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
-                <ScalarProperty Name="FavoriteQoutes" ColumnName="FavoriteQoutes" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="TestBD1Model.Comment">
               <MappingFragment StoreEntitySet="Comment">
@@ -148,6 +231,76 @@
                 <ScalarProperty Name="PostLink" ColumnName="PostLink" />
                 <ScalarProperty Name="PostOwner" ColumnName="PostOwner" />
                 <ScalarProperty Name="PostId" ColumnName="PostId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TestBD1Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="TestBD1Model.Person">
+              <MappingFragment StoreEntitySet="People">
+                <ScalarProperty Name="CommentOwner" ColumnName="CommentOwner" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="PoliticalViewsLink" ColumnName="PoliticalViewsLink" />
+                <ScalarProperty Name="PoliticalViews" ColumnName="PoliticalViews" />
+                <ScalarProperty Name="ReligousViewsLink" ColumnName="ReligousViewsLink" />
+                <ScalarProperty Name="ReligousViews" ColumnName="ReligousViews" />
+                <ScalarProperty Name="Languages" ColumnName="Languages" />
+                <ScalarProperty Name="InterestedIn" ColumnName="InterestedIn" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Screennames" ColumnName="Screennames" />
+                <ScalarProperty Name="AddressMapLink" ColumnName="AddressMapLink" />
+                <ScalarProperty Name="AddressName" ColumnName="AddressName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Skills" ColumnName="Skills" />
+                <ScalarProperty Name="FacebookName" ColumnName="FacebookName" />
+                <ScalarProperty Name="FacebookId" ColumnName="FacebookId" />
+                <ScalarProperty Name="PeopleId" ColumnName="PeopleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PeopleWorkEdus">
+            <EntityTypeMapping TypeName="TestBD1Model.PeopleWorkEdu">
+              <MappingFragment StoreEntitySet="PeopleWorkEdu">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="FacebookID" ColumnName="FacebookID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PeoplePlaces">
+            <EntityTypeMapping TypeName="TestBD1Model.PeoplePlace">
+              <MappingFragment StoreEntitySet="PeoplePlace">
+                <ScalarProperty Name="FacebookID" ColumnName="FacebookID" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FamilyRoles">
+            <EntityTypeMapping TypeName="TestBD1Model.FamilyRole">
+              <MappingFragment StoreEntitySet="FamilyRole">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="FacebookID2" ColumnName="FacebookID2" />
+                <ScalarProperty Name="FacebookID1" ColumnName="FacebookID1" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
