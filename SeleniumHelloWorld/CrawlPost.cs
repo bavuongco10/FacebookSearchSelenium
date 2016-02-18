@@ -52,11 +52,11 @@ namespace SeleniumHelloWorld
 
         private void InitDrivers()
         {
-            driverFunction.InitDriver(DriverSearch);
+            DriverSearch=driverFunction.InitDriver(DriverSearch);
             
-            driverFunction.InitDriver(DriverPost);
+             DriverPost=driverFunction.InitDriver(DriverPost);
 
-            driverFunction.InitDriver(DriverReply);
+            DriverReply=driverFunction.InitDriver(DriverReply);
         }
 
         

@@ -96,5 +96,31 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="People_test">
+      <EntityTypeMapping TypeName="TestBD1Model.People_test">
+        <MappingFragment StoreEntitySet="People_test">
+          <ScalarProperty Name="CommentOwner" ColumnName="CommentOwner" />
+          <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+          <ScalarProperty Name="PoliticalViewsLink" ColumnName="PoliticalViewsLink" />
+          <ScalarProperty Name="PoliticalViews" ColumnName="PoliticalViews" />
+          <ScalarProperty Name="ReligousViewsLink" ColumnName="ReligousViewsLink" />
+          <ScalarProperty Name="ReligousViews" ColumnName="ReligousViews" />
+          <ScalarProperty Name="Languages" ColumnName="Languages" />
+          <ScalarProperty Name="InterestedIn" ColumnName="InterestedIn" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="Screennames" ColumnName="Screennames" />
+          <ScalarProperty Name="AddressMapLink" ColumnName="AddressMapLink" />
+          <ScalarProperty Name="AddressName" ColumnName="AddressName" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Skills" ColumnName="Skills" />
+          <ScalarProperty Name="FacebookName" ColumnName="FacebookName" />
+          <ScalarProperty Name="FacebookId" ColumnName="FacebookId" />
+          <ScalarProperty Name="PeopleId" ColumnName="PeopleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

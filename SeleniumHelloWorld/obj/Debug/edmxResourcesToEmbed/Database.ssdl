@@ -46,6 +46,31 @@
     <Property Name="Relationship" Type="nvarchar(max)" />
     <Property Name="CommentOwner" Type="nvarchar" MaxLength="200" />
   </EntityType>
+  <EntityType Name="People_test">
+    <Key>
+      <PropertyRef Name="PeopleId" />
+    </Key>
+    <Property Name="PeopleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FacebookId" Type="nvarchar" MaxLength="100" />
+    <Property Name="FacebookName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Skills" Type="nvarchar(max)" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="100" />
+    <Property Name="AddressName" Type="nvarchar(max)" />
+    <Property Name="AddressMapLink" Type="nvarchar(max)" />
+    <Property Name="Screennames" Type="nvarchar(max)" />
+    <Property Name="Website" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar(max)" />
+    <Property Name="Birthday" Type="nvarchar" MaxLength="100" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="100" />
+    <Property Name="InterestedIn" Type="nvarchar(max)" />
+    <Property Name="Languages" Type="nvarchar(max)" />
+    <Property Name="ReligousViews" Type="nvarchar(max)" />
+    <Property Name="ReligousViewsLink" Type="nvarchar(max)" />
+    <Property Name="PoliticalViews" Type="nvarchar(max)" />
+    <Property Name="PoliticalViewsLink" Type="nvarchar(max)" />
+    <Property Name="Relationship" Type="nvarchar(max)" />
+    <Property Name="CommentOwner" Type="nvarchar" MaxLength="200" />
+  </EntityType>
   <EntityType Name="PeoplePlace">
     <Key>
       <PropertyRef Name="ID" />
@@ -92,6 +117,7 @@
     <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FamilyRole" EntityType="Self.FamilyRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="People_test" EntityType="Self.People_test" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PeoplePlace" EntityType="Self.PeoplePlace" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PeopleWorkEdu" EntityType="Self.PeopleWorkEdu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />

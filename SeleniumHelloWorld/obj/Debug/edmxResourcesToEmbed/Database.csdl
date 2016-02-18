@@ -8,6 +8,7 @@
     <EntitySet Name="PeopleWorkEdus" EntityType="TestBD1Model.PeopleWorkEdu" />
     <EntitySet Name="PeoplePlaces" EntityType="TestBD1Model.PeoplePlace" />
     <EntitySet Name="FamilyRoles" EntityType="TestBD1Model.FamilyRole" />
+    <EntitySet Name="People_test" EntityType="TestBD1Model.People_test" />
   </EntityContainer>
   <EntityType Name="Comment">
     <Key>
@@ -96,5 +97,30 @@
     <Property Name="FacebookID1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="FacebookID2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Role" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="People_test">
+    <Key>
+      <PropertyRef Name="PeopleId" />
+    </Key>
+    <Property Name="PeopleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FacebookId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FacebookName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Skills" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AddressName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddressMapLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Screennames" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Website" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Birthday" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="InterestedIn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Languages" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReligousViews" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReligousViewsLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PoliticalViews" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PoliticalViewsLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Relationship" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CommentOwner" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

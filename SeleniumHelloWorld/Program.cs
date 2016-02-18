@@ -15,7 +15,7 @@ namespace SeleniumHelloWorld
             //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new input());
             //var crawl = new CrawlPost();
-            CrawlInfor crawlInfor = new CrawlInfor();
+            CrawlInforUsingRequest crawlInfor = new CrawlInforUsingRequest();
         }
     }
 }
