@@ -1,0 +1,21 @@
+E:\Repository\quanlykhoa\Development\QuanLyKhoa\Extention\bin\Debug\Extention.exe.config
+E:\Repository\quanlykhoa\Development\QuanLyKhoa\Extention\bin\Debug\Extention.exe
+E:\Repository\quanlykhoa\Development\QuanLyKhoa\Extention\bin\Debug\Extention.pdb
+E:\Repository\quanlykhoa\Development\QuanLyKhoa\Extention\bin\Debug\GoogleApiUtils.dll
+E:\Repository\quanlykhoa\Development\QuanLyKhoa\Extention\bin\Debug\Google.Apis.Calendar.v3.dll
+E:\Repository\quanlykhoa\Development\QuanLyKhoa\Extention\bin\Debug\AutoMapper.dll
+E:\Repository\quanlykhoa\Development\QuanLyKhoa\Extention\bin\Debug\Google.Apis.Authentication.OAuth2.dll
+E:\Repository\quanlykhoa\Development\QuanLyKhoa\Extention\bin\Debug\DotNetOpenAuth.dll
+E:\Repository\quanlykhoa\Development\QuanLyKhoa\Extention\bin\Debug\Google.Apis.dll
+E:\Repository\quanlykhoa\Development\QuanLyKhoa\Extention\bin\Debug\Newtonsoft.Json.Net35.dll
+E:\Repository\quanlykhoa\Development\QuanLyKhoa\Extention\bin\Debug\GoogleApiUtils.pdb
+E:\Repository\quanlykhoa\Development\QuanLyKhoa\Extention\bin\Debug\AutoMapper.xml
+E:\Repository\quanlykhoa\Development\QuanLyKhoa\Extention\obj\Debug\Extention.csprojResolveAssemblyReference.cache
+E:\Repository\quanlykhoa\Development\QuanLyKhoa\Extention\obj\Debug\Extention.exe
+E:\Repository\quanlykhoa\Development\QuanLyKhoa\Extention\obj\Debug\Extention.pdb
+C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\Extention\obj\Debug\Extention.csprojResolveAssemblyReference.cache
+C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\Extention\obj\Debug\Extention.exe
+C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\Extention\obj\Debug\Extention.pdb
+C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\Extention\bin\Debug\Extention.exe.config
+C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\Extention\bin\Debug\Extention.exe
+C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\Extention\bin\Debug\Extention.pdb

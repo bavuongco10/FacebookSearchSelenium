@@ -21,27 +21,22 @@ namespace SeleniumHelloWorld
 {
     internal class CrawlPost
     {
-        private DriverFunction driverFunction = new DriverFunction();
+        private DriverHelper _driverHelper = new DriverHelper();
         private string cookiesFilePath = "d:\\cookies.txt";
         public TestBD1Entities db = new TestBD1Entities();
-        public Resources Resources = new Resources();
+        private Resources _resources;
         public IWebDriver DriverSearch;
         public IWebDriver DriverPost;
         public IWebDriver DriverReply;
 
-        public CrawlPost()
+        public CrawlPost(Resources resources)
         {
-            Init();
+            _resources = resources;
+            _searchString = EncodeSearchString(resources.SearchString);
         }
-        private string SearchString
-        {
-            get
-            {
-                return EncodeSearchString("vietnamese food");
-                
-            }
-        }
-        public List<string> listUrl = new List<string>();  
+
+        private string _searchString;
+        public List<string> listUrl = new List<string>();
 
         public void Init()
         {
@@ -52,14 +47,14 @@ namespace SeleniumHelloWorld
 
         private void InitDrivers()
         {
-            DriverSearch=driverFunction.InitDriver(DriverSearch);
-            
-             DriverPost=driverFunction.InitDriver(DriverPost);
+            DriverSearch=_driverHelper.InitDriver(DriverSearch,_resources);
 
-            DriverReply=driverFunction.InitDriver(DriverReply);
+             DriverPost=_driverHelper.InitDriver(DriverPost,_resources);
+
+            DriverReply=_driverHelper.InitDriver(DriverReply,_resources);
         }
 
-        
+
         private void CrawlPostsFromSrearch(IWebDriver driver)
         {
             int pastPostsLength = 0;
@@ -81,27 +76,31 @@ namespace SeleniumHelloWorld
                         var postOwner =
                             post.FindElement(By.ClassName("fwb")).FindElements(By.TagName("a"))[1].GetAttribute("href");
                         postUrl = postUrl.Replace("www.facebook.com", "touch.facebook.com");
+                        postUrl = postUrl.Replace("web.facebook.com", "touch.facebook.com");
                         var postContent = post.FindElement(By.ClassName("userContent")).Text;
 
                         postModel.PostOwner = postOwner;
                         postModel.PostDateTime = dateTime;
                         postModel.PostContent = postContent;
                         postModel.PostLink = postUrl;
-                        postModel.SearchString = SearchString;
+                        postModel.SearchString = _resources.SearchString;
+
+                        var comments = CrawlCommentsFromPost(DriverPost, postUrl);
+                        if (comments != null)
+                        {
+                            db.Comments.AddRange(comments);
+                        }
                         db.Posts.Add(postModel);
                         db.SaveChanges();
-
-                        CrawlCommentFromPost(DriverPost, postUrl);
                     }
                     pastPostsLength = postsWebdriver.Count;
-                    driverFunction.JavaScriptController(driver, JavaScriptType.ScrollBy);
+                    _driverHelper.JavaScriptController(driver, JavaScriptType.ScrollBy);
                 }
                 catch (Exception)
                 {
                     // ignored
                 }
 
-                
             }
         }
 
@@ -112,7 +111,7 @@ namespace SeleniumHelloWorld
             switch (driverType)
             {
                 case DriverType.Search:
-                    driver.Navigate().GoToUrl("https://www.facebook.com/search/top/?q=" + SearchString);
+                    driver.Navigate().GoToUrl("https://www.facebook.com/search/top/?q=" + _searchString);
                     break;
                 case DriverType.Post:
                     driver.Navigate().GoToUrl(url);
@@ -127,9 +126,9 @@ namespace SeleniumHelloWorld
             //return "halong%20bay";
         }
 
-        public void CrawlCommentFromPost(IWebDriver driver, string postUrl)
+        public List<Comment> CrawlCommentsFromPost(IWebDriver driver, string postUrl)
         {
-            
+            List<Comment> comments = new List<Comment>();
             int lastCommentObjectsLength = 0;
             Navigate(driver, DriverType.Post, postUrl);
             while (true)
@@ -169,91 +168,91 @@ namespace SeleniumHelloWorld
                         comment.CommentDateTime = commentDataTime;
                         comment.PostLink = postUrl;
 
-                        db.Comments.Add(comment);
-                        //db.SaveChanges();
+                        comments.Add(comment);
 
-                        string replyUrl;
                         if (commentWebDriver.Count > 2)
                         {
-                            replyUrl = commentWebDriver[2].FindElement(By.TagName("a")).GetAttribute("href");
+                            var replyUrl = commentWebDriver[2].FindElement(By.TagName("a")).GetAttribute("href");
                             //Crawl comment from reply
-                            CrawCommentFromReply(DriverReply, replyUrl);
+                            var replies = CrawRepliesFromComment(DriverReply, replyUrl);
+                            if (replies != null)
+                            {
+                                comments.AddRange(replies);
+                            }
                         }
                         ClickNextCommentButton(driver);
-
-                        
                     }
                     catch (Exception)
                     {
-
+                        // ignored
                     }
-
                 }
-                db.SaveChanges();
-                
                 lastCommentObjectsLength = commentObjects.Count;
             }
+            return comments;
         }
 
-        private void CrawCommentFromReply(IWebDriver driver, string replyUrl)
+        private List<Comment> CrawRepliesFromComment(IWebDriver driver, string replyUrl)
         {
-            int lastCommentObjectsLength = 0;
-            
+            List<Comment> replies = new List<Comment>();
+            int lastReplyObjectsLength = 0;
+
             Navigate(driver, DriverType.Post, replyUrl);
 
             while (true)
             {
-                
-                var commentObjects = driver.FindElements(By.ClassName("_2pis"));
-                if (commentObjects.Count == lastCommentObjectsLength)
+
+                var replyObjects = driver.FindElements(By.ClassName("_2pis"));
+                if (replyObjects.Count == lastReplyObjectsLength)
                 {
                     break;
                 }
-                for (int i = lastCommentObjectsLength; i < commentObjects.Count; i++)
+                for (int i = lastReplyObjectsLength; i < replyObjects.Count; i++)
                 {
-                    Comment comment = new Comment();
-                    var commentObject = commentObjects[i];
+                    Comment reply = new Comment();
+                    var replyObject = replyObjects[i];
                     try
                     {
-                        var commentOwner =
-                            commentObject.FindElement(By.ClassName("_1s79"))
+                        var replyOwner =
+                            replyObject.FindElement(By.ClassName("_1s79"))
                                 .GetAttribute("href")
                                 .Replace("https://touch.facebook.com/", "");
 
-                        if (commentOwner.Contains("?fref=nf"))
+                        if (replyOwner.Contains("?fref=nf"))
                         {
-                            commentOwner = commentOwner.Remove(commentOwner.IndexOf("?fref=nf", StringComparison.Ordinal));
+                            replyOwner = replyOwner.Remove(replyOwner.IndexOf("?fref=nf", StringComparison.Ordinal));
                         }
-                        else if (commentOwner.Contains("?refid="))
+                        else if (replyOwner.Contains("?refid="))
                         {
-                            commentOwner = commentOwner.Remove(commentOwner.IndexOf("?refid=", StringComparison.Ordinal));
+                            replyOwner = replyOwner.Remove(replyOwner.IndexOf("?refid=", StringComparison.Ordinal));
                         }
 
-                        var commentWebDriver = commentObject.FindElements(By.TagName("div"));
+                        var commentWebDriver = replyObject.FindElements(By.TagName("div"));
                         var commentContent = commentWebDriver[0].Text;
                         var commentDataTime =
                             commentWebDriver[commentWebDriver.Count - 1].FindElement(By.TagName("abbr"))
                                 .GetAttribute("data-store")
                                 .Split(',')[0].Split(':')[1];
-                        comment.CommentOwner = commentOwner;
-                        comment.CommentContent = commentContent;
-                        comment.CommentDateTime = commentDataTime;
-                        comment.PostLink = replyUrl;
-                        db.Comments.Add(comment);
+                        reply.CommentOwner = replyOwner;
+                        reply.CommentContent = commentContent;
+                        reply.CommentDateTime = commentDataTime;
+                        reply.PostLink = replyUrl;
+
+                        replies.Add(reply);
+
                         ClickNextCommentButton(driver);
                     }
                     catch (Exception)
                     {
-
+                        // ignored
                     }
                 }
-                db.SaveChanges();
-                lastCommentObjectsLength = commentObjects.Count;
-                
+                lastReplyObjectsLength = replyObjects.Count;
             }
+            return replies;
         }
 
-        public string GetPostID(IWebDriver driver)
+        public string GetPostId(IWebDriver driver)
         {
             var href = driver.FindElement(By.XPath(".//*/a[contains(@class,'_15ko')]")).GetAttribute("href");
             var id = href.Split('&').FirstOrDefault(o => o.Contains("shareID=")).Replace("shareID=", "");

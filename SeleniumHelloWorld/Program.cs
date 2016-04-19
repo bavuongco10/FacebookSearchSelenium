@@ -10,12 +10,10 @@ namespace SeleniumHelloWorld
     {
         private static void Main(string[] args)
         {
-            
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new input());
-            //var crawl = new CrawlPost();
-            CrawlInforUsingRequest crawlInfor = new CrawlInforUsingRequest();
+
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Input());
         }
     }
 }

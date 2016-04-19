@@ -10,13 +10,14 @@ using OpenQA.Selenium.Chrome;
 
 namespace SeleniumHelloWorld
 {
-    class DriverFunction
+    class DriverHelper
     {
-        private Resources resources = new Resources();
+        private Resources resources;
 
-        public IWebDriver InitDriver(IWebDriver driver)
+        public IWebDriver InitDriver(IWebDriver driver, Resources resources)
         {
             driver = new ChromeDriver(DriverService(),ChromeOptions());
+            this.resources = resources;
             Login(driver);
             return driver;
         }
@@ -30,9 +31,9 @@ namespace SeleniumHelloWorld
         public void LoginByAccount(IWebDriver driver)
         {
             driver.FindElement(By.Name("email")).Clear();
-            driver.FindElement(By.Name("email")).SendKeys(resources.userName);
+            driver.FindElement(By.Name("email")).SendKeys(resources.UserName);
             driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(resources.pass);
+            driver.FindElement(By.Name("pass")).SendKeys(resources.Pass);
             driver.FindElement(By.Name("login")).Click();
         }
 

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestBD1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TestBD1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Comments" EntityType="TestBD1Model.Comment" />
+    <EntitySet Name="Posts" EntityType="TestBD1Model.Post" />
+    <EntitySet Name="sysdiagrams" EntityType="TestBD1Model.sysdiagram" />
+    <EntitySet Name="People" EntityType="TestBD1Model.Person" />
+    <EntitySet Name="PeopleWorkEdus" EntityType="TestBD1Model.PeopleWorkEdu" />
+    <EntitySet Name="PeoplePlaces" EntityType="TestBD1Model.PeoplePlace" />
+    <EntitySet Name="FamilyRoles" EntityType="TestBD1Model.FamilyRole" />
+    <EntitySet Name="People_test" EntityType="TestBD1Model.People_test" />
+  </EntityContainer>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CommentOwner" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CommentContent" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="CommentDateTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CommentLikesCount" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="CommentShareCount" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="PostLink" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="PostId" />
+    </Key>
+    <Property Name="PostId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PostOwner" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PostLink" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="PostDateTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PostContent" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="SearchString" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="PeopleId" />
+    </Key>
+    <Property Name="PeopleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FacebookId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FacebookName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Skills" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AddressName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddressMapLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Screennames" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Website" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Birthday" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="InterestedIn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Languages" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReligousViews" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReligousViewsLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PoliticalViews" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PoliticalViewsLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Relationship" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CommentOwner" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="PeopleWorkEdu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FacebookID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Level" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Role" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="PeoplePlace">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Role" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FacebookID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="FamilyRole">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FacebookID1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FacebookID2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Role" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="People_test">
+    <Key>
+      <PropertyRef Name="PeopleId" />
+    </Key>
+    <Property Name="PeopleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FacebookId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FacebookName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Skills" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AddressName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddressMapLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Screennames" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Website" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Birthday" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="InterestedIn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Languages" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReligousViews" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReligousViewsLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PoliticalViews" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PoliticalViewsLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Relationship" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CommentOwner" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

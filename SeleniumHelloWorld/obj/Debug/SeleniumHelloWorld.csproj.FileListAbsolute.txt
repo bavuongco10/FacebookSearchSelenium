@@ -76,9 +76,10 @@ C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookCrawlCommentSele
 C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookCrawlCommentSelenium\SeleniumHelloWorld\obj\Debug\SeleniumHelloWorld.application
 C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookCrawlCommentSelenium\SeleniumHelloWorld\obj\Debug\SeleniumHelloWorld.exe
 C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookCrawlCommentSelenium\SeleniumHelloWorld\obj\Debug\SeleniumHelloWorld.pdb
-C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\obj\Debug\SeleniumHelloWorld.csprojResolveAssemblyReference.cache
 C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\obj\Debug\SeleniumHelloWorld.input.resources
 C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\obj\Debug\SeleniumHelloWorld.csproj.GenerateResource.Cache
+C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\obj\Debug\SeleniumHelloWorld.exe
+C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\obj\Debug\SeleniumHelloWorld.pdb
 C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\bin\Debug\SeleniumHelloWorld.exe.config
 C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\bin\Debug\SeleniumHelloWorld.exe.manifest
 C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\bin\Debug\SeleniumHelloWorld.application
@@ -101,5 +102,6 @@ C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\S
 C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\bin\Debug\WebDriver.Support.xml
 C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\obj\Debug\SeleniumHelloWorld.exe.manifest
 C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\obj\Debug\SeleniumHelloWorld.application
-C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\obj\Debug\SeleniumHelloWorld.exe
-C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\obj\Debug\SeleniumHelloWorld.pdb
+C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\obj\Debug\SeleniumHelloWorld.csprojResolveAssemblyReference.cache
+C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\bin\Debug\Extention.exe
+C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\SeleniumHelloWorld\bin\Debug\Extention.pdb

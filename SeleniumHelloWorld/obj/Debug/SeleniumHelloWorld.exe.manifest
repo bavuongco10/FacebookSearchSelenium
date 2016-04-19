@@ -78,6 +78,18 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Extention.exe" size="7680">
+      <assemblyIdentity name="Extention" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>FUEwLinjOhdn3hWN92kBlpGGEq6C0bGR8/mr5jpS9hw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="HtmlAgilityPack.dll" size="134656">
       <assemblyIdentity name="HtmlAgilityPack" version="1.4.9.0" publicKeyToken="BD319B19EAF3B43A" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -90,14 +102,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SeleniumHelloWorld.exe" size="70584">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SeleniumHelloWorld.exe" size="68608">
       <assemblyIdentity name="SeleniumHelloWorld" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>olVWiXjBXkPHTbHJ9W40EUteTM5PLK0HxdQeLGvVSB4=</dsig:DigestValue>
+        <dsig:DigestValue>mluFqoF0xayU8pVPg4LuzTAUdlOdL/87XAZIBay/hx4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

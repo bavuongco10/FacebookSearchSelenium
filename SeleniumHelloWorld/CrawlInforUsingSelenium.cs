@@ -11,16 +11,17 @@ namespace SeleniumHelloWorld
     internal class CrawlInforUsingSelenium
     {
         private int addedNumbers = 0;
-        private List<string> errors = new List<string>(); 
+        private List<string> errors = new List<string>();
         private static readonly int numberOfDrivers = 1;
         public TestBD1Entities db = new TestBD1Entities();
-        private DriverFunction driverFunction = new DriverFunction();
+        private DriverHelper _driverHelper = new DriverHelper();
         private IWebDriver[] drivers = new IWebDriver[numberOfDrivers];
         private List<Person> persons = new List<Person>();
+        private Resources resources;
 
-        public CrawlInforUsingSelenium()
+        public CrawlInforUsingSelenium(Resources resources )
         {
-            Init();
+            this.resources = resources;
         }
 
         private void Init()
@@ -35,7 +36,8 @@ namespace SeleniumHelloWorld
 
         private void InitCrawler()
         {
-            var commentOwners = db.Comments.Select(o => o.CommentOwner).Distinct().ToList();
+            var postlinks = db.Posts.Where(p => p.SearchString == resources.SearchString).Select( p => p.PostLink).Distinct();
+            var commentOwners = db.Comments.Where(o => postlinks.Contains(o.PostLink)).Select(o => o.CommentOwner).Distinct().ToList();
             string commentOwnerUrl;
             foreach (var commentOwner in commentOwners)
             {
@@ -69,7 +71,7 @@ namespace SeleniumHelloWorld
         {
             for (var i = 0; i < numberOfDrivers; i++)
             {
-                drivers[i] = driverFunction.InitDriver(drivers[i]);
+                drivers[i] = _driverHelper.InitDriver(drivers[i],resources);
             }
         }
 
@@ -78,7 +80,7 @@ namespace SeleniumHelloWorld
             drivers[0].Navigate().GoToUrl(commentOwnerUrl);
             if (drivers[0].Title.Contains("Page Not Found") || drivers[0].Title == "Facebook")
             {
-                errors.Add(owner);   
+                errors.Add(owner);
                 return;
             }
             Person person = new Person();
@@ -141,7 +143,7 @@ namespace SeleniumHelloWorld
             }
 
         }
-        
+
         private List<PeopleWorkEdu> CreatObjectWorkEdu(List<List<string>> works, string id,string type)
         {
             List<PeopleWorkEdu> workList  =new List<PeopleWorkEdu>();
@@ -173,7 +175,7 @@ namespace SeleniumHelloWorld
             }
             else
             {
-                
+
                 url =
                     driver.FindElement(By.XPath(".//*[@id='root']/div/div[1]/div[2]/div/div[1]/a")).GetAttribute("href");
                 if (url.IndexOf("&id=")!=-1)
@@ -182,14 +184,14 @@ namespace SeleniumHelloWorld
                 }
                 else
                 {
-                    //url = url.Substring(url.IndexOf("_id=") + 4, 30);        
+                    //url = url.Substring(url.IndexOf("_id=") + 4, 30);
                     url = Regex.Match(url, @"\d+").Value;
                 }
                 if (url.IndexOf("&set=") !=-1)
                 {
                     url = url.Substring(0, url.IndexOf("&set="));
                 }
-                
+
             }
             parts.Add(name);
             parts.Add(url);
@@ -276,7 +278,7 @@ namespace SeleniumHelloWorld
                     By.XPath(string.Format("//*[@id='{0}']/div/div/div/div/div[1]", type.ToString().ToLower())));
             foreach (var educationDriver in educationDrivers)
             {
-                
+
                 // select in this node
                 var tiles = educationDriver.FindElements(By.XPath("./div"));
                 string educationUrl = null;
