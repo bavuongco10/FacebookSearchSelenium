@@ -84,5 +84,10 @@ namespace Extention
 			if (email != null) return Regex.IsMatch(email, MatchEmailPattern);
 			return false;
 		}
-	}
+
+        private bool IsNumber(string searchString)
+        {
+            return !string.IsNullOrEmpty(searchString) && searchString.All(char.IsDigit);
+        }
+    }
 }

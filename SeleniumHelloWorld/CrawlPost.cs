@@ -75,7 +75,6 @@ namespace SeleniumHelloWorld
                         postModel.PostContent = postContent;
                         postModel.PostLink = postUrl;
                         postModel.SearchString = _resources.SearchString;
-
                         var comments = CrawlCommentsFromPost(DriverPost, postUrl);
                         if (comments != null)
                         {
@@ -163,12 +162,30 @@ namespace SeleniumHelloWorld
 
                         if (commentWebDriver.Count > 2)
                         {
-                            var replyUrl = commentWebDriver[2].FindElement(By.TagName("a")).GetAttribute("href");
-                            //Crawl comment from reply
-                            var replies = CrawRepliesFromComment(DriverReply, replyUrl);
-                            if (replies != null)
+                            var replyUrl = string.Empty;
+                            if (commentWebDriver.Count<=7)
                             {
-                                comments.AddRange(replies);
+                                replyUrl = commentWebDriver[2].FindElement(By.TagName("a")).GetAttribute("href");
+                            }
+                            else
+                            {
+                                var aReplyObjects =
+                                    commentWebDriver[2].FindElements(By.TagName("a"));
+                                if (aReplyObjects.Count > 1)
+                                {
+                                    replyUrl  = aReplyObjects[1].GetAttribute("href");
+                                }
+                                
+                            }
+                            if (replyUrl.Contains("/comment/replies/"))
+                            {
+                                //Crawl comment from reply
+                                var replies = CrawRepliesFromComment(DriverReply, replyUrl);
+
+                                if (replies != null)
+                                {
+                                    comments.AddRange(replies);
+                                }
                             }
                         }
                         if (nextbuttonClickable)
@@ -176,9 +193,11 @@ namespace SeleniumHelloWorld
                             nextbuttonClickable = ClickNextCommentButton(driver);
                         }
                     }
-                    catch (Exception)
+                    catch (Exception exception)
                     {
                         // ignored
+                        Debug.WriteLine(exception.Message);
+                        Console.WriteLine(exception.Message);
                     }
                 }
                 lastCommentObjectsLength = commentObjects.Count;
@@ -276,6 +295,7 @@ namespace SeleniumHelloWorld
             catch (Exception exception)
             {
                 Debug.WriteLine(exception.Message);
+                Console.WriteLine(exception.Message);
                 clickable = false;
             }
             return clickable;

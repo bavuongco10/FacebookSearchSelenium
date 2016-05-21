@@ -32,6 +32,5 @@ namespace SeleniumHelloWorld
         public virtual DbSet<PeopleWorkEdu> PeopleWorkEdus { get; set; }
         public virtual DbSet<PeoplePlace> PeoplePlaces { get; set; }
         public virtual DbSet<FamilyRole> FamilyRoles { get; set; }
-        public virtual DbSet<People_test> People_test { get; set; }
     }
 }

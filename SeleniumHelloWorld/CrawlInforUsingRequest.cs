@@ -4,17 +4,17 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Extention;
 using HtmlAgilityPack;
 
 namespace SeleniumHelloWorld
 {
     internal class CrawlInforUsingRequest
     {
-        private const int RANGE = 50;
-        private List<People_test> persons = new List<People_test>(); 
+        private const int RANGE = 500;
+        private List<Person> persons = new List<Person>(); 
         private  List<string> errorurls = new List<string>();
         private  int lastIndex = 0;
         public TestBD1Entities db = new TestBD1Entities();
@@ -37,7 +37,7 @@ namespace SeleniumHelloWorld
 
         private void InitCrawler()
         {
-            var commentOwners = db.Comments.Select(o => o.CommentOwner).Distinct().Take(100).ToList();
+            var commentOwners = db.Comments.Select(o => o.CommentOwner).Distinct().ToList();
             //var commentOwners = new List<string>() { "albert.ortega.904","Yusaku.Pham", "bui.thanh.ba.vuong", "100002917108835" };
 
             /// Thread compare record 3 times
@@ -67,15 +67,10 @@ namespace SeleniumHelloWorld
             Parallel.ForEach(
                 commentOwners,
                 //new ParallelOptions {MaxDegreeOfParallelism = 4},
-                commentOwner =>
-                {
-                    var commentOwnerUrl = GetCommentOwnerUrl(commentOwner);
-
-                    CrawlInformation(commentOwnerUrl, commentOwner);
-                }
+                CrawlInformation
                 );
             watch.Stop();
-            db.People_test.AddRange(persons.GetRange(lastIndex, persons.Count-lastIndex));
+            db.People.AddRange(persons.GetRange(lastIndex, persons.Count-lastIndex));
             db.SaveChanges();
 
             var results = commentOwners.Except(list).ToList();
@@ -97,7 +92,7 @@ namespace SeleniumHelloWorld
                 owner = owner.Remove(owner.IndexOf("?refid="));
             }
 
-            if (owner.Contains("profile.php?id=") || IsNumber(owner))
+            if (owner.Contains("profile.php?id=") || owner.IsNumber())
             {
                 owner = owner.Replace("profile.php?id=", "");
                 //https://m.facebook.com/profile.php?v=info&id=100002917108835
@@ -111,13 +106,9 @@ namespace SeleniumHelloWorld
             return commentOwnerUrl;
         }
 
-        private  bool IsNumber(string searchString)
+        private  void CrawlInformation(string commentOwner)
         {
-            return !string.IsNullOrEmpty(searchString) && searchString.All(char.IsDigit);
-        }
-
-        private  void CrawlInformation(string commentOwnerUrl, string commentOwner)
-        {
+            var commentOwnerUrl = GetCommentOwnerUrl(commentOwner);
             var cookieCollection = GetCookies(cookiesFilePath);
             var html = GetHtml(commentOwnerUrl, cookieCollection);
             if (html != null)
@@ -130,7 +121,7 @@ namespace SeleniumHelloWorld
 
         private  void WriteToTextFile(string html)
         {
-            using (var writer = new StreamWriter(string.Format(@"d:\test\html{0}.html", DateTime.Now.ToFileTime())))
+            using (var writer = new StreamWriter(string.Format(@"f:\test\html{0}.html", DateTime.Now.ToFileTime())))
             {
                 writer.Write(html);
             }
@@ -160,7 +151,7 @@ namespace SeleniumHelloWorld
         private  void GetElements(HtmlDocument document, string commentOwner)
         {
             list.Add(commentOwner);
-            var person = new People_test() ;
+            var person = new Person();
             person.CommentOwner = commentOwner ;
             var facebook = GetFacebookLinkAndID(document, commentOwner);
             person.FacebookName = facebook[0];
@@ -183,12 +174,12 @@ namespace SeleniumHelloWorld
             person.Relationship = GetContactAndBasicInfor(document, KeysElement.Instance.Relationship[pageLanguage])[0];
 
             persons.Add(person);
-            //db.People_test.Add(person);
+            db.People.Add(person);
 
             var works = GetEducationAndWork(document, ExperienceType.Work);
-            //db.PeopleWorkEdus.AddRange(CreatObjectWorkEdu(works, person.FacebookId, ExperienceType.Work.ToString()));
+            db.PeopleWorkEdus.AddRange(CreatObjectWorkEdu(works, person.FacebookId, ExperienceType.Work.ToString()));
             var educations = GetEducationAndWork(document, ExperienceType.Education);
-            //db.PeopleWorkEdus.AddRange(CreatObjectWorkEdu(educations, person.FacebookId, ExperienceType.Education.ToString()));
+            db.PeopleWorkEdus.AddRange(CreatObjectWorkEdu(educations, person.FacebookId, ExperienceType.Education.ToString()));
 
             var currentCity = GetContactAndBasicInfor(document, KeysElement.Instance.CurrentCity[pageLanguage]);
             if (currentCity[0] != null)
@@ -215,13 +206,13 @@ namespace SeleniumHelloWorld
 
 
             //db.SaveChanges();
-            //if (persons.Count % RANGE == 0)
-            //{
-            //    db.People_test.AddRange(persons.GetRange(lastIndex, lastIndex+RANGE));
-            //    lastIndex = lastIndex+RANGE;
-            //    db.SaveChanges();
-            //    Console.WriteLine("<<<<<<<<<{0}>>>>>>>>>>", "Save");
-            //}
+            if (persons.Count % RANGE == 0)
+            {
+                db.People.AddRange(persons.GetRange(lastIndex, lastIndex + RANGE));
+                lastIndex = lastIndex + RANGE;
+                db.SaveChanges();
+                Console.WriteLine("<<<<<<<<<{0}>>>>>>>>>>", "Save");
+            }
             Console.WriteLine("---------{0}-------", persons.Count);
         }
 
