@@ -16,7 +16,7 @@ namespace SeleniumHelloWorld
 
         public IWebDriver InitDriver(IWebDriver driver, Resources resources)
         {
-            driver = new ChromeDriver(DriverService(),ChromeOptions());
+            driver = new ChromeDriver();//DriverService(),ChromeOptions());
             this.resources = resources;
             Login(driver);
             return driver;

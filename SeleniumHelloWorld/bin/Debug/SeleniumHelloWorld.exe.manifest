@@ -85,7 +85,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>FUEwLinjOhdn3hWN92kBlpGGEq6C0bGR8/mr5jpS9hw=</dsig:DigestValue>
+        <dsig:DigestValue>8nOReRB+nti+af5GZ0R0yq5opFVKY2F5pNR+dOlCeno=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -102,14 +102,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SeleniumHelloWorld.exe" size="68608">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SeleniumHelloWorld.exe" size="69632">
       <assemblyIdentity name="SeleniumHelloWorld" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>mluFqoF0xayU8pVPg4LuzTAUdlOdL/87XAZIBay/hx4=</dsig:DigestValue>
+        <dsig:DigestValue>9FDZgnKfIh9d7hyrdI9Yd3oDGMgBvCrpUrd8Aos4wog=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -126,14 +126,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WebDriver.dll" size="3877888">
-      <assemblyIdentity name="WebDriver" version="2.45.0.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WebDriver.dll" size="1579008">
+      <assemblyIdentity name="WebDriver" version="2.53.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lVgggRznhAovOLEbGdXMBny1QWMrmM+m/aH0gmfdcK0=</dsig:DigestValue>
+        <dsig:DigestValue>yLyMmBMg7088f+KqMLEDXG0a1hlIUzmTNpcqeKP3Qgc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -149,6 +149,15 @@
       </hash>
     </dependentAssembly>
   </dependency>
+  <file name="chromedriver.exe" size="5285376">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>mH6qxWdqzCcPjIBvDY/YNqQFWZY5WEu0LD/JyKq3wO8=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="SeleniumHelloWorld.exe.config" size="1416">
     <hash>
       <dsig:Transforms>

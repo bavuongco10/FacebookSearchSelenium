@@ -12,6 +12,9 @@ namespace SeleniumHelloWorld
             InitializeComponent();
             btnSend.Enabled = false;
             KeyPreview = true;
+            txtUserName.Text = "stannis@scryptmail.com";
+            txtPass.Text = "@abc123";
+            txtSearchString.Text = "ha noi";
         }
 
         private bool IsAllTextBoxFillIn()

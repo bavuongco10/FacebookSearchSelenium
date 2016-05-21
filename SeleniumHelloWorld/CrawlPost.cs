@@ -1,18 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.SQLite;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Windows.Forms;
-using ClosedXML.Excel;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
 using System.Web;
+using OpenQA.Selenium;
 
 // Get shares
 //https://touch.facebook.com/browse/shares/?id=10152751123721371
@@ -22,21 +13,21 @@ namespace SeleniumHelloWorld
     internal class CrawlPost
     {
         private DriverHelper _driverHelper = new DriverHelper();
+        private Resources _resources;
+
+        private string _searchString;
         private string cookiesFilePath = "d:\\cookies.txt";
         public TestBD1Entities db = new TestBD1Entities();
-        private Resources _resources;
-        public IWebDriver DriverSearch;
         public IWebDriver DriverPost;
         public IWebDriver DriverReply;
+        public IWebDriver DriverSearch;
+        public List<string> listUrl = new List<string>();
 
         public CrawlPost(Resources resources)
         {
             _resources = resources;
             _searchString = EncodeSearchString(resources.SearchString);
         }
-
-        private string _searchString;
-        public List<string> listUrl = new List<string>();
 
         public void Init()
         {
@@ -47,26 +38,26 @@ namespace SeleniumHelloWorld
 
         private void InitDrivers()
         {
-            DriverSearch=_driverHelper.InitDriver(DriverSearch,_resources);
+            DriverSearch = _driverHelper.InitDriver(DriverSearch, _resources);
 
-             DriverPost=_driverHelper.InitDriver(DriverPost,_resources);
+            DriverPost = _driverHelper.InitDriver(DriverPost, _resources);
 
-            DriverReply=_driverHelper.InitDriver(DriverReply,_resources);
+            DriverReply = _driverHelper.InitDriver(DriverReply, _resources);
         }
 
 
         private void CrawlPostsFromSrearch(IWebDriver driver)
         {
-            int pastPostsLength = 0;
+            var pastPostsLength = 0;
             while (true)
             {
                 try
                 {
                     var postsWebdriver = driver.FindElements(By.ClassName("userContentWrapper"));
                     //var postUrls = driver.FindElements(By.XPath("//*[@data-comment-prelude-ref='action_link_bling']"));
-                    for (int i = pastPostsLength; i < postsWebdriver.Count; i++)
+                    for (var i = pastPostsLength; i < postsWebdriver.Count; i++)
                     {
-                        Post postModel = new Post();
+                        var postModel = new Post();
                         var post = postsWebdriver[i];
                         string postUrl;
 
@@ -100,13 +91,11 @@ namespace SeleniumHelloWorld
                 {
                     // ignored
                 }
-
             }
         }
 
 
-
-        private void Navigate(IWebDriver driver,DriverType driverType,string url=null)
+        private void Navigate(IWebDriver driver, DriverType driverType, string url = null)
         {
             switch (driverType)
             {
@@ -119,7 +108,7 @@ namespace SeleniumHelloWorld
             }
         }
 
-        private string EncodeSearchString(string searchString=null)
+        private string EncodeSearchString(string searchString = null)
         {
             // TODO :  halong bay --> halong%20bay
             return HttpUtility.UrlEncode(searchString);
@@ -128,8 +117,9 @@ namespace SeleniumHelloWorld
 
         public List<Comment> CrawlCommentsFromPost(IWebDriver driver, string postUrl)
         {
-            List<Comment> comments = new List<Comment>();
-            int lastCommentObjectsLength = 0;
+            var nextbuttonClickable = true;
+            var comments = new List<Comment>();
+            var lastCommentObjectsLength = 0;
             Navigate(driver, DriverType.Post, postUrl);
             while (true)
             {
@@ -138,9 +128,9 @@ namespace SeleniumHelloWorld
                 {
                     break;
                 }
-                for (int i = lastCommentObjectsLength; i < commentObjects.Count; i++)
+                for (var i = lastCommentObjectsLength; i < commentObjects.Count; i++)
                 {
-                    Comment comment = new Comment();
+                    var comment = new Comment();
                     var commentObject = commentObjects[i];
                     try
                     {
@@ -150,7 +140,8 @@ namespace SeleniumHelloWorld
                                 .Replace("https://touch.facebook.com/", "");
                         if (commentOwner.Contains("?fref=nf"))
                         {
-                            commentOwner = commentOwner.Remove(commentOwner.IndexOf("?fref=nf", StringComparison.Ordinal));
+                            commentOwner =
+                                commentOwner.Remove(commentOwner.IndexOf("?fref=nf", StringComparison.Ordinal));
                         }
                         else if (commentOwner.Contains("?refid="))
                         {
@@ -160,7 +151,7 @@ namespace SeleniumHelloWorld
                         var commentWebDriver = commentObject.FindElements(By.TagName("div"));
                         var commentContent = commentWebDriver[0].Text;
                         var commentDataTime =
-                            commentWebDriver[1].FindElement(By.TagName("abbr"))
+                            commentObject.FindElement(By.TagName("abbr"))
                                 .GetAttribute("data-store")
                                 .Split(',')[0].Split(':')[1];
                         comment.CommentOwner = commentOwner;
@@ -180,7 +171,10 @@ namespace SeleniumHelloWorld
                                 comments.AddRange(replies);
                             }
                         }
-                        ClickNextCommentButton(driver);
+                        if (nextbuttonClickable)
+                        {
+                            nextbuttonClickable = ClickNextCommentButton(driver);
+                        }
                     }
                     catch (Exception)
                     {
@@ -194,22 +188,22 @@ namespace SeleniumHelloWorld
 
         private List<Comment> CrawRepliesFromComment(IWebDriver driver, string replyUrl)
         {
-            List<Comment> replies = new List<Comment>();
-            int lastReplyObjectsLength = 0;
+            var nextbuttonClickable = true;
+            var replies = new List<Comment>();
+            var lastReplyObjectsLength = 0;
 
             Navigate(driver, DriverType.Post, replyUrl);
 
             while (true)
             {
-
                 var replyObjects = driver.FindElements(By.ClassName("_2pis"));
                 if (replyObjects.Count == lastReplyObjectsLength)
                 {
                     break;
                 }
-                for (int i = lastReplyObjectsLength; i < replyObjects.Count; i++)
+                for (var i = lastReplyObjectsLength; i < replyObjects.Count; i++)
                 {
-                    Comment reply = new Comment();
+                    var reply = new Comment();
                     var replyObject = replyObjects[i];
                     try
                     {
@@ -230,7 +224,7 @@ namespace SeleniumHelloWorld
                         var commentWebDriver = replyObject.FindElements(By.TagName("div"));
                         var commentContent = commentWebDriver[0].Text;
                         var commentDataTime =
-                            commentWebDriver[commentWebDriver.Count - 1].FindElement(By.TagName("abbr"))
+                            replyObject.FindElement(By.TagName("abbr"))
                                 .GetAttribute("data-store")
                                 .Split(',')[0].Split(':')[1];
                         reply.CommentOwner = replyOwner;
@@ -240,7 +234,10 @@ namespace SeleniumHelloWorld
 
                         replies.Add(reply);
 
-                        ClickNextCommentButton(driver);
+                        if (nextbuttonClickable)
+                        {
+                            nextbuttonClickable = ClickNextCommentButton(driver);
+                        }
                     }
                     catch (Exception)
                     {
@@ -259,25 +256,30 @@ namespace SeleniumHelloWorld
             return id;
         }
 
-        private void ClickNextCommentButton(IWebDriver driver)
+        private bool ClickNextCommentButton(IWebDriver driver)
         {
-            //bool clickable = true;
-            //while (clickable)
-            //{
-                try
+            var clickable = true;
+            try
+            {
+                driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromMilliseconds(500));
+                var nextButton = driver.FindElements(By.XPath("//*[contains(@id,'see_')]/a"));
+                if (nextButton.Count > 0)
                 {
-                    driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromMilliseconds(500));
-                    driver.FindElement(By.XPath("//*[contains(@id,'see_')]/a")).Click();
-                    //driver.FindElement(By.PartialLinkText("View next comments"));
+                    nextButton[0].Click();
                 }
-                catch (Exception exception)
+                else
                 {
-                    Console.WriteLine(exception.Message);
-                    //clickable = false;
+                    clickable = false;
                 }
-            //}
+                //driver.FindElement(By.PartialLinkText("View next comments"));
+            }
+            catch (Exception exception)
+            {
+                Debug.WriteLine(exception.Message);
+                clickable = false;
+            }
+            return clickable;
         }
-
     }
 }
 
@@ -290,5 +292,5 @@ public enum DriverType
 
 public enum JavaScriptType
 {
-    ScrollBy,
+    ScrollBy
 }

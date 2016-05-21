@@ -19,3 +19,8 @@ C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\E
 C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\Extention\bin\Debug\Extention.exe.config
 C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\Extention\bin\Debug\Extention.exe
 C:\Users\Anomyous\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\Extention\bin\Debug\Extention.pdb
+C:\Users\VuGoN\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\Extention\bin\Debug\Extention.exe.config
+C:\Users\VuGoN\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\Extention\bin\Debug\Extention.exe
+C:\Users\VuGoN\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\Extention\bin\Debug\Extention.pdb
+C:\Users\VuGoN\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\Extention\obj\Debug\Extention.exe
+C:\Users\VuGoN\Documents\Visual Studio 2013\Projects\FacebookSearchSelenium\Extention\obj\Debug\Extention.pdb
